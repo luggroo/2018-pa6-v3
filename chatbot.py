@@ -7,7 +7,7 @@
 ######################################################################
 import csv
 import math
-
+import re
 import numpy as np
 
 from movielens import ratings
@@ -27,7 +27,15 @@ class Chatbot:
     #############################################################################
     # 1. WARM UP REPL
     #############################################################################
-
+    def read_movie(self):
+        f = open('data/movies.txt')
+        regex = '[0-9]*%(.*?)(?: \((\d\d\d\d(?:-(?:\d\d\d\d)?)?)\))?.?%'
+        for line in f:
+            found = re.findall(regex, line)
+            property = re.sub(regex, "", line)
+            properties = property.strip("\n").strip("\r").split("|")
+            print found, properties
+    
     def greeting(self):
       """chatbot greeting message"""
       #############################################################################
